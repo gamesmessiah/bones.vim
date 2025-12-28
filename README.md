@@ -1,45 +1,56 @@
 bones.vim 🦴
+============
 
-"Dammit Jim, I'm a doctor, not a web designer!"
+**"Dammit Jim, I'm a doctor, not a web designer!"**
 
-bones.vim is a lightweight, efficient Vim plugin designed to help you build the "bones" (boilerplate and structure) of your HTML projects without the overhead of heavy IDEs.
+`bones.vim` is a lightweight, surgical Vim plugin designed for developers who want to build the "bones" (boilerplate and structure) of HTML projects without the overhead of heavy IDEs. It provides essential structural tools while maintaining the speed and simplicity of the Vim workflow.
 
-🚀 Features
+🚀 Key Features
+---------------
 
-Boilerplate Generation: Quickly insert a modern HTML5 skeleton.
+### 1\. Boilerplate Generation
 
-Tag Poplist: A simple, numbered menu to insert common HTML tags instantly.
+Instantly inject a modern HTML5 skeleton. It includes the `<!DOCTYPE>`, responsive viewport meta tags, and sets your cursor directly inside the `<title>` tag for immediate editing.
 
-Visual Tag Wrapping: Select any text and wrap it in the tag of your choice.
+### 2\. Tag Poplist
 
-Smart Commenting: Toggle HTML comments on single lines or visual selections.
+Access a numbered menu of the most common HTML tags (div, p, h1-h6, ul, li, etc.). Simply select a number to insert the corresponding opening and closing tags at your cursor.
+
+### 3\. Visual Tag Wrapping
+
+A powerful utility for structural editing. Select any block of text in Visual Mode, trigger the command, and type the tag name you want to wrap the selection in (e.g., wrap a sentence in `<strong>` or a list in `<div>`).
+
+### 4\. Smart Commenting
+
+Toggle standard HTML comments `<!-- -->` with ease. It supports single-line toggling in Normal Mode and block-level commenting for visual selections.
 
 📦 Installation
+---------------
 
-Manual Installation
+### Manual Installation
 
-Create the plugin directory if it doesn't exist:
+1.  Create the plugin directory if it doesn't exist:
+    
+        mkdir -p ~/.vim/plugin
+    
+2.  Download `bones.vim` and move it into that directory.
+3.  Restart Vim or source the file:
+    
+        :source ~/.vim/plugin/bones.vim
+    
 
-mkdir -p ~/.vim/plugin
+### Using a Plugin Manager (Recommended)
 
+If you use [vim-plug](https://github.com/junegunn/vim-plug), add the following to your `init.vim` or `.vimrc`:
 
-Download bones.vim and drop it into that directory.
+    Plug 'yourusername/bones.vim'
 
-Restart Vim or source the file:
+Then run `:PlugInstall` within Vim.
 
-:source ~/.vim/plugin/bones.vim
+⌨️ Usage & Vitals
+-----------------
 
-
-Using a Plugin Manager (e.g., vim-plug)
-
-Add this to your init.vim or .vimrc:
-
-Plug 'yourusername/bones.vim'
-
-
-⌨️ Usage
-
-The plugin automatically activates when you open an .html file.
+The plugin automatically activates for any file with an `.html` extension.
 
 Command
 
@@ -49,7 +60,7 @@ Mode
 
 Description
 
-:BonesBoilerplate
+`:BonesBoilerplate`
 
 N/A
 
@@ -57,36 +68,46 @@ Normal
 
 Inserts a full HTML5 boilerplate.
 
-:BonesTagList
+`:BonesTagList`
 
-<Leader>t
+`<Leader>t`
 
 Normal
 
-Opens a numbered list of common tags to insert.
+Opens the numbered tag insertion menu.
 
 N/A
 
-<Leader>w
+`<Leader>w`
 
 Visual
 
-Wraps the selected text in a custom tag.
+Wraps selection in a custom tag.
 
 N/A
 
-<Leader>c
+`<Leader>c`
 
-Normal/Visual
+Normal
 
-Toggles <!-- --> comments on the current line or selection.
+Toggles comment on current line.
 
-Note: The default <Leader> key is \.
+N/A
+
+`<Leader>c`
+
+Visual
+
+Toggles comments on selection.
+
+_\*Note: The default <Leader> key in Vim is \\ (backslash)._
 
 🩺 About the Name
+-----------------
 
-The name bones.vim reflects the core philosophy of the plugin: providing the essential structural elements of a website. It also pays homage to the legendary Dr. Leonard "Bones" McCoy. Because sometimes, you just want to get the job done without the extra "technobabble."
+The name **bones.vim** reflects the core philosophy of the plugin: providing the essential structural elements of a website. It also pays homage to the legendary Dr. Leonard "Bones" McCoy. We believe in getting the job done without unnecessary "technobabble."
 
 📜 License
+----------
 
-MIT
+This project is licensed under the MIT License.
