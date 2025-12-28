@@ -1,7 +1,7 @@
 bones.vim 🦴
 ============
 
-[logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2"
+![alt text](https://github.com/gamesmessiah/bones.vim/blob/main/images/bones0.jpg)
 
 **"Dammit Jim, I'm a doctor, not a web designer!"**
 
