@@ -1,6 +1,8 @@
 bones.vim 🦴
 ============
 
+[logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2"
+
 **"Dammit Jim, I'm a doctor, not a web designer!"**
 
 `bones.vim` is a lightweight, surgical Vim plugin designed for developers who want to build the "bones" (boilerplate and structure) of HTML projects without the overhead of heavy IDEs. It provides essential structural tools while maintaining the speed and simplicity of the Vim workflow.
