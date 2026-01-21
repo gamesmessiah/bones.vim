@@ -114,7 +114,7 @@ function! BonesInsertLayoutTop() abort
         \ '    <title>Document</title>',
         \ '</head>',
         \ '<body>',
-        \ '<header style="background: #333; color: #fff; padding: 1rem;">',
+        \ '<header style="background: #333; color: #fff; padding: 1rem; top: 0; left: 0; position: fixed; width: 100%; box-sizing: border-box;">',
         \ '    <nav style="display: flex; justify-content: space-between; align-items: center;">',
         \ '        <div class="logo">Brand</div>',
         \ '        <ul style="display: flex; list-style: none; gap: 15px; margin: 0;">',
