@@ -3,7 +3,6 @@
 " Tagline: "Dammit Jim, I'm a doctor, not a web designer!"
 " Description: Build the 'bones' (boilerplate and structure) of your HTML sites.
 " File: bones.vim
-" Author: Cameron Taylor
 " License: MIT
 " 
 " IMAGE REFERENCE:
