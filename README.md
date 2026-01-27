@@ -64,13 +64,16 @@ Inserts a full HTML5 boilerplate.
 :BonesBoilerplate
 
 (v1.2) Inserts flexbox layout with a left sidebar.
-:    :BonesLayoutLeft
+    
+        :BonesLayoutLeft
 
 (v1.2) Inserts flexbox layout with a top nav bar.
-:BonesLayoutTop
+
+        :BonesLayoutTop
 
 Opens the numbered tag insertion menu.
-:BonesTagList
+
+        :BonesLayoutList
 
 🩺 About the Name
 -----------------
