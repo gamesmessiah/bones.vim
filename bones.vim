@@ -20,9 +20,6 @@
 "  0. You just DO WHAT THE FUCK YOU WANT TO.
 " ==============================================================================
 " 
-" IMAGE REFERENCE:
-" [Bones McCoy Picture: https://github.com/gamesmessiah/bones.vim/blob/main/images/bones0.jpg]
-" 
 " INSTALLATION:
 " 1. Create the plugin directory if it doesn't exist:
 "      mkdir -p ~/.vim/plugin
@@ -33,6 +30,7 @@
 " - :BonesBoilerplate      : Inserts standard HTML5 structure.
 " - :BonesLayoutLeft        : Inserts a layout with a left sidebar menu.
 " - :BonesLayoutTop         : Inserts a layout with a top navigation menu.
+" - :BonesParallax          : Inserts a 3D CSS parallax scrolling layout.
 " - <Leader>t               : Opens the tag selection poplist.
 " - <Leader>c               : Toggles HTML comments (Normal/Visual mode).
 " - <Leader>w               : Wraps selected text in a tag (Visual mode).
@@ -49,6 +47,7 @@ function! BonesInit() abort
     command! BonesBoilerplate call BonesInsertBoilerplate()
     command! BonesLayoutLeft call BonesInsertLayoutLeft()
     command! BonesLayoutTop call BonesInsertLayoutTop()
+    command! BonesParallax call BonesInsertParallax()
 
     " 2. Visual Mode Mapping for Tag Wrapping
     vnoremap <buffer> <leader>w :<C-u>call BonesWrapTag()<CR>
@@ -230,6 +229,114 @@ function! BonesInsertLayoutTop() abort
     call append(line('.'), l:layout[1:])
 endfunction
 
+" --- Layout: Parallax Scrolling ---
+function! BonesInsertParallax() abort
+    let l:layout = [
+        \ '<!DOCTYPE html>',
+        \ '<html lang="en">',
+        \ '<head>',
+        \ '    <meta charset="UTF-8">',
+        \ '    <meta name="viewport" content="width=device-width, initial-scale=1.0">',
+        \ '    <title>Parallax</title>',
+        \ '    <style>',
+        \ '        /* Basic Reset */',
+        \ '        * { margin: 0; padding: 0; box-sizing: border-box; }',
+        \ '',
+        \ '        .parallax-wrapper {',
+        \ '            height: 100vh;',
+        \ '            overflow-x: hidden;',
+        \ '            overflow-y: auto;',
+        \ '            perspective: 300px; ',
+        \ '            scroll-behavior: smooth;',
+        \ '        }',
+        \ '',
+        \ '        /* Group container for layers */',
+        \ '        .parallax-group {',
+        \ '            position: relative;',
+        \ '            height: 100vh;',
+        \ '            transform-style: preserve-3d;',
+        \ '        }',
+        \ '',
+        \ '        /* Common layer styling */',
+        \ '        .layer {',
+        \ '            position: absolute;',
+        \ '            top: 0;',
+        \ '            left: 0;',
+        \ '            right: 0;',
+        \ '            bottom: 0;',
+        \ '            display: flex;',
+        \ '            align-items: center;',
+        \ '            justify-content: center;',
+        \ '            color: white;',
+        \ '            font-family: sans-serif;',
+        \ '        }',
+        \ '',
+        \ '        .background {',
+        \ '            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), ',
+        \ '                        url(''https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1920&q=80'');',
+        \ '            background-size: cover;',
+        \ '            background-position: center;',
+        \ '            transform: translateZ(-300px) scale(2);',
+        \ '            z-index: -1;',
+        \ '        }',
+        \ '',
+        \ '        /* Foreground sits at normal depth */',
+        \ '        .foreground {',
+        \ '            transform: translateZ(0);',
+        \ '            pointer-events: none; /* Let clicks pass through if needed */',
+        \ '        }',
+        \ '',
+        \ '        .foreground h1 {',
+        \ '            font-size: 4rem;',
+        \ '            text-shadow: 0 5px 15px rgba(0,0,0,0.5);',
+        \ '        }',
+        \ '',
+        \ '        /* Regular content section to scroll into */',
+        \ '        .content {',
+        \ '            height: 100vh;',
+        \ '            background: #1a1a1a;',
+        \ '            color: #ccc;',
+        \ '            display: flex;',
+        \ '            flex-direction: column;',
+        \ '            align-items: center;',
+        \ '            justify-content: center;',
+        \ '            padding: 2rem;',
+        \ '            font-family: sans-serif;',
+        \ '            position: relative;',
+        \ '            z-index: 2;',
+        \ '        }',
+        \ '',
+        \ '        .content h2 { margin-bottom: 1rem; color: #fff; }',
+        \ '        .content p { line-height: 1.6; max-width: 600px; text-align: center; }',
+        \ '    </style>',
+        \ '</head>',
+        \ '<body>',
+        \ '',
+        \ '    <div class="parallax-wrapper">',
+        \ '        ',
+        \ '        <header class="parallax-group">',
+        \ '            <div class="layer background"></div>',
+        \ '            <div class="layer foreground">',
+        \ '                <h1>PARALLAX</h1>',
+        \ '            </div>',
+        \ '        </header>',
+        \ '',
+        \ '        <main class="content">',
+        \ '            <h2>Main Content Area</h2>',
+        \ '            <p>',
+        \ '                Your content goes here...',
+        \ '            </p>',
+        \ '        </main>',
+        \ '',
+        \ '    </div>',
+        \ '',
+        \ '</body>',
+        \ '</html>'
+        \ ]
+    call setline(line('.'), l:layout[0])
+    call append(line('.'), l:layout[1:])
+endfunction
+
 
 " --- Tag Wrapping Function ---
 function! BonesWrapTag() abort
@@ -272,7 +379,7 @@ endfunction
 
 " --- Tag Poplist Function ---
 function! BonesTagList() abort
-    let l:tags = ['h1', 'p', 'div', 'ul', 'li', 'a', 'img', 'input', 'button', 'script', 'style']
+    let l:tags = ['h1', 'p', 'div', 'ul', 'li', 'a', 'img', 'input', 'button', 'script', 'style', 'header', 'footer', 'main', 'section']
     let l:tag_choices = ['Bones.vim - Select Tag:']
     let l:idx = 1
     for l:tag in l:tags
@@ -284,10 +391,22 @@ function! BonesTagList() abort
 
     if l:choice > 0
         let l:tag_name = l:tags[l:choice - 1] 
-        if l:tag_name =~# '^\(img\|input\)$'
-            call append(line('.'), printf('<%s>', l:tag_name))
-            call cursor(line('.') + 1, 2 + len(l:tag_name))
+        
+        " Special handling for attribute-heavy self-closing tags
+        if l:tag_name ==# 'img'
+            call append(line('.'), '<img src="" alt="">')
+            call cursor(line('.') + 1, 11) " Position cursor inside src quotes
+        elseif l:tag_name ==# 'a'
+            call append(line('.'), ['<a href="">', '</a>'])
+            call cursor(line('.') + 1, 10) " Position cursor inside href quotes
+        elseif l:tag_name ==# 'input'
+            call append(line('.'), '<input type="text" value="">')
+            call cursor(line('.') + 1, 28)
+        elseif l:tag_name =~# '^\(script\|style\)$'
+            call append(line('.'), [printf('<%s>', l:tag_name), printf('</%s>', l:tag_name)])
+            call cursor(line('.') + 1, 1)
         else
+            " Standard block tags
             call append(line('.'), [printf('<%s>', l:tag_name), printf('</%s>', l:tag_name)])
             call cursor(line('.') + 1, 1)
         endif
