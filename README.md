@@ -60,33 +60,17 @@ Then run `:PlugInstall` within Vim.
 
 The plugin automatically activates for any file with an .html extension.
 
-Command
-
-Mapping
-
-Mode
-
-Description
-
+Inserts a full HTML5 boilerplate.
 :BonesBoilerplate
 
-N/A
-
-Normal
-
-Inserts a full HTML5 boilerplate.
-
+(v1.2) Inserts flexbox layout with a left sidebar.
 :BonesLayoutLeft
 
-(v1.2) Inserts flexbox layout with a left sidebar.
-
+(v1.2) Inserts flexbox layout with a top nav bar.
 :BonesLayoutTop
 
-(v1.2) Inserts flexbox layout with a top nav bar.
-
-:BonesTagList
-
 Opens the numbered tag insertion menu.
+:BonesTagList
 
 🩺 About the Name
 -----------------
