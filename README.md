@@ -56,6 +56,8 @@ Then run `:PlugInstall` within Vim.
 ⌨️ Usage & Vitals
 -----------------
 
+![alt text](https://github.com/gamesmessiah/bones.vim/blob/main/images/bones0.gif)
+
 The plugin automatically activates for any file with an .html extension.
 
 Command
