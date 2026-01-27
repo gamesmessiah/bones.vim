@@ -76,53 +76,15 @@ Inserts a full HTML5 boilerplate.
 
 :BonesLayoutLeft
 
-N/A
-
-Normal
-
 (v1.2) Inserts flexbox layout with a left sidebar.
 
 :BonesLayoutTop
-
-N/A
-
-Normal
 
 (v1.2) Inserts flexbox layout with a top nav bar.
 
 :BonesTagList
 
-<Leader>t
-
-Normal
-
 Opens the numbered tag insertion menu.
-
-N/A
-
-<Leader>w
-
-Visual
-
-Wraps selection in a custom tag.
-
-N/A
-
-<Leader>c
-
-Normal
-
-Toggles comment on current line.
-
-N/A
-
-<Leader>c
-
-Visual
-
-Toggles comments on selection.
-
-*Note: The default <Leader> key in Vim is \ (backslash).
 
 🩺 About the Name
 -----------------
