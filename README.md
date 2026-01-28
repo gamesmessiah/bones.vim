@@ -1,5 +1,3 @@
-Don't worry I've updated it, but could you just read it over and make sure it all looks good:
-
 bones.vim 🦴
 ============
 
