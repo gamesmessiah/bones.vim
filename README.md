@@ -1,3 +1,5 @@
+Don't worry I've updated it, but could you just read it over and make sure it all looks good:
+
 bones.vim 🦴
 ============
 
@@ -71,6 +73,10 @@ Inserts a full HTML5 boilerplate.
 
         :BonesLayoutTop
 
+(v1.2) To create a basic Parallax template.
+
+        :BonesParallax
+
 Opens the numbered tag insertion menu.
 
         :BonesLayoutList
@@ -80,7 +86,4 @@ Opens the numbered tag insertion menu.
 
 The name bones.vim reflects the core philosophy of the plugin: providing the essential structural elements of a website. It also pays homage to the legendary Dr. Leonard "Bones" McCoy. We believe in getting the job done without unnecessary "technobabble."
 
-📜 License
------------------
 
-This project is licensed under the MIT License.
