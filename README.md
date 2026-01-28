@@ -49,7 +49,7 @@ Toggle standard HTML comments <!-- --> with ease. It supports single-line toggli
 
 If you use [vim-plug](https://github.com/junegunn/vim-plug), add the following to your `init.vim` or `.vimrc`:
 
-    Plug 'yourusername/bones.vim'
+    Plug 'gamesmessiah/bones.vim'
 
 Then run `:PlugInstall` within Vim.
 
