@@ -3,10 +3,11 @@
 " Tagline: "Dammit Jim, I'm a doctor, not a web designer!"
 " Description: Build the 'bones' (boilerplate and structure) of your HTML sites.
 " File: bones.vim
+" Version: 2.0
 " ==============================================================================
 "
-"        DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
-"                    Version 2, December 2004
+"         DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+"                     Version 2, December 2004
 "
 " Copyright (C) 2004 Sam Hocevar <sam@hocevar.net>
 "
@@ -14,7 +15,7 @@
 " copies of this license document, and changing it is allowed as long
 " as the name is changed.
 "
-"            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+"             DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
 "   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
 "
 "  0. You just DO WHAT THE FUCK YOU WANT TO.
@@ -28,12 +29,12 @@
 " 
 " USAGE:
 " - :BonesBoilerplate      : Inserts standard HTML5 structure.
-" - :BonesLayoutLeft        : Inserts a layout with a left sidebar menu.
-" - :BonesLayoutTop         : Inserts a layout with a top navigation menu.
-" - :BonesParallax          : Inserts a 3D CSS parallax scrolling layout.
-" - <Leader>t               : Opens the tag selection poplist.
-" - <Leader>c               : Toggles HTML comments (Normal/Visual mode).
-" - <Leader>w               : Wraps selected text in a tag (Visual mode).
+" - :BonesLayoutLeft       : Inserts a layout with a left sidebar menu.
+" - :BonesLayoutTop        : Inserts a layout with a top navigation menu.
+" - :BonesParallax         : Inserts a 3D CSS parallax scrolling layout.
+" - <Leader>t              : Opens the tag selection poplist.
+" - <Leader>c              : Toggles HTML comments (Normal/Visual mode).
+" - <Leader>w              : Wraps selected text in a tag (Visual mode).
 " ==============================================================================
 
 " Ensure commands and mappings only apply to HTML files
@@ -237,15 +238,21 @@ function! BonesInsertParallax() abort
         \ '<head>',
         \ '    <meta charset="UTF-8">',
         \ '    <meta name="viewport" content="width=device-width, initial-scale=1.0">',
-        \ '    <title>Parallax</title>',
+        \ '    <title>Parallax Fixed</title>',
         \ '    <style>',
         \ '        /* Basic Reset */',
         \ '        * { margin: 0; padding: 0; box-sizing: border-box; }',
+        \ '',
+        \ '        body {',
+        \ '            background-color: #1a1a1a;',
+        \ '            overflow: hidden; /* Prevents double scrollbars */',
+        \ '        }',
         \ '',
         \ '        .parallax-wrapper {',
         \ '            height: 100vh;',
         \ '            overflow-x: hidden;',
         \ '            overflow-y: auto;',
+        \ '            /* perspective defines the viewer distance */',
         \ '            perspective: 300px; ',
         \ '            scroll-behavior: smooth;',
         \ '        }',
@@ -255,6 +262,7 @@ function! BonesInsertParallax() abort
         \ '            position: relative;',
         \ '            height: 100vh;',
         \ '            transform-style: preserve-3d;',
+        \ '            z-index: 1; /* Creates a stacking context for the 3D layers */',
         \ '        }',
         \ '',
         \ '        /* Common layer styling */',
@@ -269,6 +277,8 @@ function! BonesInsertParallax() abort
         \ '            justify-content: center;',
         \ '            color: white;',
         \ '            font-family: sans-serif;',
+        \ '            /* Improves rendering performance in Chrome */',
+        \ '            backface-visibility: hidden;',
         \ '        }',
         \ '',
         \ '        .background {',
@@ -276,38 +286,47 @@ function! BonesInsertParallax() abort
         \ '                        url(''https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1920&q=80'');',
         \ '            background-size: cover;',
         \ '            background-position: center;',
-        \ '            transform: translateZ(-300px) scale(2);',
+        \ '            ',
+        \ '            /* Scale(2.1) instead of 2.0 fixes the white line artifact ',
+        \ '               by ensuring the image bleeds slightly off-screen.',
+        \ '            */',
+        \ '            transform: translateZ(-300px) scale(2.1);',
         \ '            z-index: -1;',
         \ '        }',
         \ '',
         \ '        /* Foreground sits at normal depth */',
         \ '        .foreground {',
         \ '            transform: translateZ(0);',
-        \ '            pointer-events: none; /* Let clicks pass through if needed */',
+        \ '            pointer-events: none; ',
+        \ '            z-index: 1;',
         \ '        }',
         \ '',
         \ '        .foreground h1 {',
         \ '            font-size: 4rem;',
         \ '            text-shadow: 0 5px 15px rgba(0,0,0,0.5);',
+        \ '            letter-spacing: 10px;',
         \ '        }',
         \ '',
-        \ '        /* Regular content section to scroll into */',
+        \ '        /* The Fix: High z-index and position: relative ',
+        \ '           forces Chrome to paint this section ABOVE the 3D depth of the header.',
+        \ '        */',
         \ '        .content {',
-        \ '            height: 100vh;',
+        \ '            min-height: 100vh;',
         \ '            background: #1a1a1a;',
         \ '            color: #ccc;',
         \ '            display: flex;',
         \ '            flex-direction: column;',
         \ '            align-items: center;',
         \ '            justify-content: center;',
-        \ '            padding: 2rem;',
+        \ '            padding: 4rem 2rem;',
         \ '            font-family: sans-serif;',
         \ '            position: relative;',
-        \ '            z-index: 2;',
+        \ '            z-index: 10; ',
         \ '        }',
         \ '',
-        \ '        .content h2 { margin-bottom: 1rem; color: #fff; }',
-        \ '        .content p { line-height: 1.6; max-width: 600px; text-align: center; }',
+        \ '        .content h2 { margin-bottom: 1.5rem; color: #fff; font-size: 2.5rem; }',
+        \ '        .content p { line-height: 1.8; max-width: 700px; text-align: center; font-size: 1.1rem; }',
+        \ '',
         \ '    </style>',
         \ '</head>',
         \ '<body>',
