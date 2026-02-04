@@ -56,9 +56,9 @@ The plugin automatically activates for any file with an .html extension.
 
         :BonesBoilerplate		Inserts a full HTML5 boilerplate.
         :BonesLayoutLeft		Inserts flexbox layout with a fixed left sidebar.
-        :BonesLayoutTop		Inserts flexbox layout with a top nav bar.
-        :BonesParallax		Generates a 3D CSS parallax scrolling template.
-        :BonesParallax		Opens a menu to inject UI components (Cards, Headers, etc.).
+        :BonesLayoutTop			Inserts flexbox layout with a top nav bar.
+        :BonesParallax			Generates a 3D CSS parallax scrolling template.
+        :BonesParallax			Opens a menu to inject UI components (Cards, Headers, etc.).
 
 Mappings
 
