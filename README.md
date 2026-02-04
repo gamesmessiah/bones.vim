@@ -62,9 +62,9 @@ The plugin automatically activates for any file with an .html extension.
 
 Mappings
 
-	Visual Mode <leader>w: Wrap selection in a custom tag.
-	Normal/Visual <leader>c: Toggle HTML comments.
-	Normal Mode <leader>t: Quick-access to the Component List.
+	Visual Mode 	<leader>w: Wrap selection in a custom tag.
+	Normal/Visual 	<leader>c: Toggle HTML comments.
+	Normal Mode 	<leader>t: Quick-access to the Component List.
 
 🩺 About the Name
 
