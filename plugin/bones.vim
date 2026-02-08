@@ -3,11 +3,11 @@
 " Tagline: "Dammit Jim, I'm a doctor, not a web designer!"
 " Description: Build the 'bones' (boilerplate and structure) of your HTML sites.
 " File: bones.vim
-" Version: 3.0
+" Version: 3.2
 " ==============================================================================
 "
-"         DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
-"                     Version 2, December 2004
+"          DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+"                    Version 2, December 2004
 "
 " Copyright (C) 2004 Sam Hocevar <sam@hocevar.net>
 "
@@ -15,7 +15,7 @@
 " copies of this license document, and changing it is allowed as long
 " as the name is changed.
 "
-"             DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+"          DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
 "   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
 "
 "  0. You just DO WHAT THE FUCK YOU WANT TO.
@@ -381,7 +381,7 @@ endfunction
 
 " --- Component List Function ---
 function! BonesComponentList() abort
-    let l:choices = ['Bones.vim - Select Component:', '1. Header', '2. Card', '3. Footer']
+    let l:choices = ['Bones.vim - Select Component:', '1. Header', '2. Card', '3. Footer', '4. Email Form']
     let l:choice = inputlist(l:choices)
     if l:choice == 1
         call BonesInsertHeader()
@@ -389,6 +389,8 @@ function! BonesComponentList() abort
         call BonesInsertCard()
     elseif l:choice == 3
         call BonesInsertFooter()
+    elseif l:choice == 4
+        call BonesInsertEmailForm()
     endif
 endfunction
 
@@ -484,6 +486,59 @@ function! BonesInsertFooter() abort
         \ '<footer class="site-footer">',
         \ '    <p>&copy; ' . strftime("%Y") . ' Company Name. Built with Bones.vim</p>',
         \ '</footer>'
+        \ ]
+    call BonesInjectAssets(l:css, l:html)
+endfunction
+
+" --- Email Form Component ---
+function! BonesInsertEmailForm() abort
+    let l:css = [
+        \ '        .form-container {',
+        \ '            background: white;',
+        \ '            padding: 2rem;',
+        \ '            border-radius: 8px;',
+        \ '            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);',
+        \ '            width: 100%;',
+        \ '            max-width: 400px;',
+        \ '            margin: 2rem auto;',
+        \ '        }',
+        \ '        .form-container h2 { margin-top: 0; color: #333; }',
+        \ '        .form-container label { display: block; margin-bottom: 5px; font-weight: bold; color: #555; }',
+        \ '        .form-container input, .form-container textarea {',
+        \ '            width: 100%;',
+        \ '            padding: 10px;',
+        \ '            margin-bottom: 15px;',
+        \ '            border: 1px solid #ccc;',
+        \ '            border-radius: 4px;',
+        \ '            box-sizing: border-box;',
+        \ '            font-family: inherit;',
+        \ '        }',
+        \ '        .form-container textarea { height: 100px; resize: vertical; }',
+        \ '        .form-container button {',
+        \ '            width: 100%;',
+        \ '            padding: 10px;',
+        \ '            background-color: #007BFF;',
+        \ '            color: white;',
+        \ '            border: none;',
+        \ '            border-radius: 4px;',
+        \ '            cursor: pointer;',
+        \ '            font-size: 1rem;',
+        \ '        }',
+        \ '        .form-container button:hover { background-color: #0056b3; }'
+        \ ]
+    let l:html = [
+        \ '<div class="form-container">',
+        \ '    <h2>Send a Message</h2>',
+        \ '    <form action="YOUR_BACKEND_URL" method="POST">',
+        \ '        <label for="name">Name</label>',
+        \ '        <input type="text" id="name" name="name" placeholder="Your name" required>',
+        \ '        <label for="email">Email</label>',
+        \ '        <input type="email" id="email" name="email" placeholder="email@example.com" required>',
+        \ '        <label for="message">Message</label>',
+        \ '        <textarea id="message" name="message" placeholder="How can we help?" required></textarea>',
+        \ '        <button type="submit">Send Message</button>',
+        \ '    </form>',
+        \ '</div>'
         \ ]
     call BonesInjectAssets(l:css, l:html)
 endfunction
