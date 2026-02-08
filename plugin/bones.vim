@@ -3,24 +3,8 @@
 " Tagline: "Dammit Jim, I'm a doctor, not a web designer!"
 " Description: Build the 'bones' (boilerplate and structure) of your HTML sites.
 " File: bones.vim
-" Version: 3.2
+" Version: 3.4
 " ==============================================================================
-"
-"          DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
-"                    Version 2, December 2004
-"
-" Copyright (C) 2004 Sam Hocevar <sam@hocevar.net>
-"
-" Everyone is permitted to copy and distribute verbatim or modified
-" copies of this license document, and changing it is allowed as long
-" as the name is changed.
-"
-"          DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
-"   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
-"
-"  0. You just DO WHAT THE FUCK YOU WANT TO.
-" ==============================================================================
-
 " Ensure commands and mappings only apply to HTML files
 autocmd FileType html ++once call BonesInit()
 
@@ -53,6 +37,7 @@ function! BonesInsertBoilerplate() abort
         \ '            margin: 0;',
         \ '            font-family: system-ui, -apple-system, sans-serif;',
         \ '            line-height: 1.5;',
+        \ '            padding-bottom: 100px;',
         \ '        }',
         \ '    </style>',
         \ '</head>',
@@ -80,6 +65,7 @@ function! BonesInsertLayoutLeft() abort
         \ '            margin: 0;',
         \ '            padding: 0;',
         \ '            font-family: system-ui, sans-serif;',
+        \ '            padding-bottom: 100px;',
         \ '        }',
         \ '        .container {',
         \ '            display: flex;',
@@ -151,6 +137,10 @@ function! BonesInsertLayoutTop() abort
         \ '    <meta name="viewport" content="width=device-width, initial-scale=1.0">',
         \ '    <title>Document</title>',
         \ '    <style>',
+        \ '        body {',
+        \ '            font-family: system-ui, sans-serif;',
+        \ '            padding-bottom: 100px;',
+        \ '        }',
         \ '        header {',
         \ '            background: #333;',
         \ '            color: #fff;',
@@ -234,20 +224,17 @@ function! BonesInsertParallax() abort
         \ '            height: 100vh;',
         \ '            overflow-x: hidden;',
         \ '            overflow-y: auto;',
-        \ '            /* perspective defines the viewer distance */',
         \ '            perspective: 300px; ',
         \ '            scroll-behavior: smooth;',
         \ '        }',
         \ '',
-        \ '        /* Group container for layers */',
         \ '        .parallax-group {',
         \ '            position: relative;',
         \ '            height: 100vh;',
         \ '            transform-style: preserve-3d;',
-        \ '            z-index: 1; /* Creates a stacking context for the 3D layers */',
+        \ '            z-index: 1;',
         \ '        }',
         \ '',
-        \ '        /* Common layer styling */',
         \ '        .layer {',
         \ '            position: absolute;',
         \ '            top: 0;',
@@ -259,7 +246,6 @@ function! BonesInsertParallax() abort
         \ '            justify-content: center;',
         \ '            color: white;',
         \ '            font-family: sans-serif;',
-        \ '            /* Improves rendering performance in Chrome */',
         \ '            backface-visibility: hidden;',
         \ '        }',
         \ '',
@@ -268,15 +254,10 @@ function! BonesInsertParallax() abort
         \ '                        url(''https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1920&q=80'');',
         \ '            background-size: cover;',
         \ '            background-position: center;',
-        \ '            ',
-        \ '            /* Scale(2.1) instead of 2.0 fixes the white line artifact ',
-        \ '               by ensuring the image bleeds slightly off-screen.',
-        \ '            */',
         \ '            transform: translateZ(-300px) scale(2.1);',
         \ '            z-index: -1;',
         \ '        }',
         \ '',
-        \ '        /* Foreground sits at normal depth */',
         \ '        .foreground {',
         \ '            transform: translateZ(0);',
         \ '            pointer-events: none; ',
@@ -289,9 +270,6 @@ function! BonesInsertParallax() abort
         \ '            letter-spacing: 10px;',
         \ '        }',
         \ '',
-        \ '        /* The Fix: High z-index and position: relative ',
-        \ '           forces Chrome to paint this section ABOVE the 3D depth of the header.',
-        \ '        */',
         \ '        .content {',
         \ '            min-height: 100vh;',
         \ '            background: #1a1a1a;',
@@ -314,23 +292,17 @@ function! BonesInsertParallax() abort
         \ '<body>',
         \ '',
         \ '    <div class="parallax-wrapper">',
-        \ '        ',
         \ '        <header class="parallax-group">',
         \ '            <div class="layer background"></div>',
         \ '            <div class="layer foreground">',
         \ '                <h1>PARALLAX</h1>',
         \ '            </div>',
         \ '        </header>',
-        \ '',
         \ '        <main class="content">',
         \ '            <h2>Main Content Area</h2>',
-        \ '            <p>',
-        \ '                Your content goes here...',
-        \ '            </p>',
+        \ '            <p>Your content goes here...</p>',
         \ '        </main>',
-        \ '',
         \ '    </div>',
-        \ '',
         \ '</body>',
         \ '</html>'
         \ ]
@@ -381,7 +353,7 @@ endfunction
 
 " --- Component List Function ---
 function! BonesComponentList() abort
-    let l:choices = ['Bones.vim - Select Component:', '1. Header', '2. Card', '3. Footer', '4. Email Form']
+    let l:choices = ['Bones.vim - Select Component:', '1. Header', '2. Card', '3. Footer', '4. Email Form', '5. Image Left Section', '6. Image Right Section']
     let l:choice = inputlist(l:choices)
     if l:choice == 1
         call BonesInsertHeader()
@@ -391,6 +363,10 @@ function! BonesComponentList() abort
         call BonesInsertFooter()
     elseif l:choice == 4
         call BonesInsertEmailForm()
+    elseif l:choice == 5
+        call BonesInsertImageLeft()
+    elseif l:choice == 6
+        call BonesInsertImageRight()
     endif
 endfunction
 
@@ -538,6 +514,87 @@ function! BonesInsertEmailForm() abort
         \ '        <textarea id="message" name="message" placeholder="How can we help?" required></textarea>',
         \ '        <button type="submit">Send Message</button>',
         \ '    </form>',
+        \ '</div>'
+        \ ]
+    call BonesInjectAssets(l:css, l:html)
+endfunction
+
+" --- Image Left Component ---
+function! BonesInsertImageLeft() abort
+    let l:css = [
+        \ '        .image-left-container {',
+        \ '            display: flex;',
+        \ '            align-items: center;',
+        \ '            gap: 20px;',
+        \ '            padding: 20px;',
+        \ '            font-family: sans-serif;',
+        \ '        }',
+        \ '        .image-left-container img {',
+        \ '            max-width: 300px;',
+        \ '            height: auto;',
+        \ '            border-radius: 8px;',
+        \ '        }',
+        \ '        .image-left-container .text-content {',
+        \ '            flex: 1;',
+        \ '        }',
+        \ '        @media (max-width: 600px) {',
+        \ '            .image-left-container {',
+        \ '                flex-direction: column;',
+        \ '                text-align: center;',
+        \ '            }',
+        \ '        }'
+        \ ]
+    let l:html = [
+        \ '<div class="image-left-container">',
+        \ '    <img src="https://th.wallhaven.cc/small/vp/vpz76l.jpg" alt="Description of image">',
+        \ '    <div class="text-content">',
+        \ '        <h1>Image Left Layout</h1>',
+        \ '        <p>',
+        \ '            This is an example of a simple layout where the image is positioned on the left',
+        \ '            and the text flows on the right.',
+        \ '        </p>',
+        \ '    </div>',
+        \ '</div>'
+        \ ]
+    call BonesInjectAssets(l:css, l:html)
+endfunction
+
+" --- Image Right Component ---
+function! BonesInsertImageRight() abort
+    let l:css = [
+        \ '        .image-right-container {',
+        \ '            display: flex;',
+        \ '            align-items: center;',
+        \ '            gap: 20px;',
+        \ '            padding: 20px;',
+        \ '            font-family: sans-serif;',
+        \ '        }',
+        \ '        .image-right-container img {',
+        \ '            max-width: 300px;',
+        \ '            height: auto;',
+        \ '            border-radius: 12px;',
+        \ '        }',
+        \ '        .image-right-container .text-content {',
+        \ '            flex: 1;',
+        \ '        }',
+        \ '        @media (max-width: 600px) {',
+        \ '            .image-right-container {',
+        \ '                flex-direction: column-reverse;',
+        \ '                text-align: center;',
+        \ '            }',
+        \ '        }'
+        \ ]
+    let l:html = [
+        \ '<div class="image-right-container">',
+        \ '    <div class="text-content">',
+        \ '        <h1>Image Right Layout</h1>',
+        \ '        <p>',
+        \ '            This is an example of a simple layout where the image is positioned on the right',
+        \ '            and the text flows on the left. On mobile, the column-reverse ensures the image',
+        \ '            remains visually on top.',
+        \ '        </p>',
+        \ '    </div>',
+        \ '    <img src="https://th.wallhaven.cc/small/vp/vpz76l.jpg" alt="Atmospheric scenery">',
         \ '</div>'
         \ ]
     call BonesInjectAssets(l:css, l:html)
